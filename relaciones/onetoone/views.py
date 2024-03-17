@@ -22,5 +22,26 @@ def create (resquest):
 
  ## return HttpResponse ("Datos guardades corectamente")
 
+def  consultar (request, id):
+  r = Place.objects.get(id=id) #trae el registro que coincida con la llave primaria
+
+  print (r)
+  return HttpResponse (f"Nombre: {r.name}, Direccion: {r.addres}")  
+
+def  modificar(request,name,addres,id):
+    
+  r = Place.objects.get(id=id)
+  r.name = name
+  r.addres = addres
+  r.save()
+  
+
+  return HttpResponse ('Se actualizaron los Datos')
+
+def eliminar(request,id):
+  r = Place.objects.get(id=id)
+  r.delete()
+  return HttpResponse ("Registro Eliminado")
+
 
 
